@@ -1,5 +1,6 @@
 import os
 import uvicorn
+import subprocess
 from fastapi import Body, FastAPI, WebSocket
 
 app = FastAPI()
@@ -56,8 +57,14 @@ def getData():
         transcribed_content = transliterate_russian_to_english(content)  # транслитерация с русского на английский
         return transcribed_content
 
+def run_servers():
+    http_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "localhost", "--port", "80", "--reload"])
+    https_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "localhost", "--port", "443", "--reload", "--ssl-keyfile", "checkers.key", "--ssl-certfile", "checkers.crt"])
+    
+    # Ожидание завершения обоих процессов
+    http_server.communicate()
+    https_server.communicate()
+
 if __name__ == "__main__":
-     uvicorn.run("main:app", host="localhost", port = 443, reload=True,
-                ssl_keyfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'checkers.key'),
-                ssl_certfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'checkers.crt'))
+    run_servers()
     #uvicorn.run("main:app", host="localhost", port=80, reload=True)192.168.0.48
