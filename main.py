@@ -8,7 +8,7 @@ app = FastAPI()
 def root():
     return "hello"
 if __name__ == "__main__":
-     uvicorn.run("main:app", host="89.111.170.135", reload=True,
-                ssl_keyfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ibook-daa2557bc9hb3.keenetic.pro-privateKey.key'),
-                ssl_certfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ibook-daa2557bc9hb3.keenetic.pro.crt'))
-    #uvicorn.run("main:app", host="localhost", port=80, reload=True)
+     uvicorn.run("main:app", host="localhost", reload=True,
+                ssl_keyfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'checkers.key'),
+                ssl_certfile=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'checkers.crt'))
+    #uvicorn.run("main:app", host="localhost", port=80, reload=True)192.168.0.48
