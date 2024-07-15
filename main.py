@@ -58,8 +58,8 @@ def getData():
         return transcribed_content
 
 def run_servers():
-    http_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "localhost", "--port", "80", "--reload"])
-    https_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "localhost", "--port", "443", "--reload", "--ssl-keyfile", "checkers.key", "--ssl-certfile", "checkers.crt"])
+    http_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "80", "--reload"])
+    https_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "443", "--reload", "--ssl-keyfile", "checkers.key", "--ssl-certfile", "checkers.crt"])
     
     # Ожидание завершения обоих процессов
     http_server.communicate()
@@ -67,4 +67,4 @@ def run_servers():
 
 if __name__ == "__main__":
     run_servers()
-    #uvicorn.run("main:app", host="localhost", port=80, reload=True)192.168.0.48
+    #uvicorn.run("main:app", host="localhost", port=80, reload=True)#192.168.0.48
