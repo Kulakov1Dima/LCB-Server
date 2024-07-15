@@ -20,7 +20,7 @@ def read_Alice(request = Body(embed=True), session = Body(embed=True)):
             "version": "1.0"
         }
     else:
-        if(request['command'] == "помощь"):
+        if(request['command'] == "как дела"):
             results = {
                 "response": {
                     "text": "ты говно.",
