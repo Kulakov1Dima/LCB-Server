@@ -20,14 +20,21 @@ def read_Alice(request = Body(embed=True), session = Body(embed=True)):
             "version": "1.0"
         }
     else:
-        with open("kal.txt", "w") as file:
-            file.write(request['command'])
-        results = {
-            "response": {
-                "text": request['command']
-            },
-            "version": "1.0"
-        }
+        if(request['command'] == "помощь"):
+            results = {
+                "response": {
+                    "text": "ты говно.",
+                    "tts": "ты говн+о."
+                },
+                "version": "1.0"
+            }
+        else:
+            results = {
+                "response": {
+                    "text": request['command']
+                },
+                "version": "1.0"
+            }
     return results
 
 def transliterate_russian_to_english(text):
@@ -58,8 +65,8 @@ def getData():
         return transcribed_content
 
 def run_servers():
-    http_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "80", "--reload"])
-    https_server = subprocess.Popen(["python", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "443", "--reload", "--ssl-keyfile", "checkers.key", "--ssl-certfile", "checkers.crt"])
+    http_server = subprocess.Popen(["python3", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "80", "--reload"])
+    https_server = subprocess.Popen(["python3", "-m", "uvicorn", "main:app", "--host", "192.168.0.48", "--port", "443", "--reload", "--ssl-keyfile", "checkers.key", "--ssl-certfile", "checkers.crt"])
     
     # Ожидание завершения обоих процессов
     http_server.communicate()
